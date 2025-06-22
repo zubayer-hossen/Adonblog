@@ -4,7 +4,7 @@ const API = axios.create({
   baseURL: 'https://adonblog.onrender.com',
   withCredentials: true
 });
-REACT_APP_API_URL=https://adonblog.onrender.com
+
 
 
 API.interceptors.request.use((config) => {

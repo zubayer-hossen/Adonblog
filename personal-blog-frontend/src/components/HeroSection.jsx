@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import API from "../services/api";
-import { Link } from "react-router";
+import { Link } from "react-router"; // ✅ Correct import
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import ImageCard from "./ImageCard";
 
 // Hero Carousel Data
 const heroBanners = [
@@ -55,6 +56,13 @@ const stats = [
   { id: 2, number: "350+", label: "Happy Readers", color: "pink" },
   { id: 3, number: "5⭐", label: "Top Rated Blog", color: "green" },
 ];
+
+// Create color map for Tailwind-safe class names
+const colorClassMap = {
+  indigo: "text-indigo-700",
+  pink: "text-pink-700",
+  green: "text-green-700",
+};
 
 // Testimonials Data
 const testimonials = [
@@ -155,12 +163,7 @@ const HomePage = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-10">
           {galleryImages.map((image) => (
-            <img
-              key={image.id}
-              src={image.src}
-              alt={image.alt}
-              className="rounded-xl shadow-lg hover:scale-105 transition duration-500"
-            />
+            <ImageCard key={image.id} src={image.src} alt={image.alt} />
           ))}
         </div>
       </div>
@@ -191,7 +194,11 @@ const HomePage = () => {
         <div className="flex justify-center gap-20 text-center">
           {stats.map((stat) => (
             <div key={stat.id}>
-              <h3 className={`text-5xl font-bold text-${stat.color}-700 mb-2`}>
+              <h3
+                className={`text-5xl font-bold ${
+                  colorClassMap[stat.color]
+                } mb-2`}
+              >
                 {stat.number}
               </h3>
               <p className="text-xl">{stat.label}</p>
