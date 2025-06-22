@@ -13,10 +13,21 @@ const heroBanners = [
 
 // Gallery Data
 const galleryImages = [
-  { id: 1, src: "/assets/gallery/gallery1.jpg", alt: "Gallery Image 1" },
-  { id: 2, src: "/assets/gallery/gallery2.jpg", alt: "Gallery Image 2" },
-  { id: 3, src: "/assets/gallery/gallery3.jpg", alt: "Gallery Image 3" },
-  { id: 4, src: "/assets/gallery/gallery4.jpg", alt: "Gallery Image 4" },
+  {
+    id: 1,
+    src: "https://i.ibb.co/whwqtDpB/24e89613-9160-42c1-a068-103d7ba043a6.jpg",
+    alt: "Gallery Image 1",
+  },
+  {
+    id: 2,
+    src: "https://i.ibb.co/SwNPpR2Z/97dadd93-10db-41c6-821c-c0401421361f.jpg",
+    alt: "Gallery Image 2",
+  },
+  {
+    id: 3,
+    src: "https://i.ibb.co/G4dChsQc/66b7f461-b20e-40c4-8926-61a86b73d6f9.jpg",
+    alt: "Gallery Image 3",
+  },
 ];
 
 // Features Data
