@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import API from "../services/api";
-import { useNavigate, useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router"; // Fixed react-router import
 
 const BlogForm = () => {
   const navigate = useNavigate();
@@ -16,11 +16,15 @@ const BlogForm = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       if (blogId) {
-        const { data } = await API.get(`/blogs/${blogId}`);
-        setTitle(data.title);
-        setContent(data.content);
-        setCategory(data.category);
-        setImage(data.image);
+        try {
+          const { data } = await API.get(`/blogs/${blogId}`);
+          setTitle(data.title);
+          setContent(data.content);
+          setCategory(data.category);
+          setImage(data.image);
+        } catch (error) {
+          console.error("Error fetching blog:", error);
+        }
       }
     };
     fetchBlog();
@@ -36,22 +40,25 @@ const BlogForm = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setImage(data.imageUrl);
-      setUploading(false);
     } catch (err) {
-      console.error(err);
-      setUploading(false);
+      console.error("Image upload error:", err);
     }
+    setUploading(false);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const blogData = { title, content, category, image };
-    if (blogId) {
-      await API.put(`/blogs/${blogId}`, blogData);
-    } else {
-      await API.post("/blogs", blogData);
+    try {
+      if (blogId) {
+        await API.put(`/blogs/${blogId}`, blogData);
+      } else {
+        await API.post("/blogs", blogData);
+      }
+      navigate("/admin");
+    } catch (error) {
+      console.error("Error submitting blog:", error);
     }
-    navigate("/admin");
   };
 
   return (
@@ -66,6 +73,7 @@ const BlogForm = () => {
           className="w-full p-2 border rounded"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
         />
         <input
           type="text"
@@ -73,18 +81,20 @@ const BlogForm = () => {
           className="w-full p-2 border rounded"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
+          required
         />
         <textarea
           placeholder="Content"
           className="w-full p-2 border rounded h-40"
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          required
         />
         <input type="file" onChange={uploadFileHandler} />
         {uploading && <p>Uploading...</p>}
         {image && (
           <img
-            src={`http://localhost:5000${image}`}
+            src={`${process.env.REACT_APP_API_URL}${image}`} // Dynamically load full URL
             alt="Uploaded"
             className="w-full h-40 object-cover rounded"
           />
