@@ -8,6 +8,9 @@ import "yet-another-react-lightbox/styles.css";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Captions from "yet-another-react-lightbox/plugins/captions";
+import SocialLinks from "./SocialLinks";
+import DateTimeCard from "./DateTime";
+import BlogStatistics from "./BlogStatistics";
 
 // Dummy banners
 const heroBanners = [
@@ -344,6 +347,36 @@ const galleryImages = [
     src: "https://i.ibb.co/DPMhLPMQ/29ad26ab-fb78-44cd-891b-e588d64f543c.jpg",
     alt: "Image 66",
   },
+  {
+    id: 67,
+    src: "https://i.ibb.co/gLwCTKkg/504260159-17853409623454993-6081939436270152729-n.jpg",
+    alt: "Image 67",
+  },
+  {
+    id: 68,
+    src: "https://i.ibb.co/Kppn3wft/484051291-122161139690324085-2428346724630378676-n.jpg",
+    alt: "Image 68",
+  },
+  {
+    id: 69,
+    src: "https://i.ibb.co/ym3DrxGd/503896325-17853409605454993-2823211170656690157-n.jpg",
+    alt: "Image 69",
+  },
+  {
+    id: 70,
+    src: "https://i.ibb.co/21N2tmzK/472934089-122151000266324085-4145025628840180273-n.jpg",
+    alt: "Image 70",
+  },
+  {
+    id: 71,
+    src: "https://i.ibb.co/67269vxf/504472775-17853409632454993-7805500479543292401-n.jpg",
+    alt: "Image 71",
+  },
+  {
+    id: 72,
+    src: "https://i.ibb.co/JwLS2VwR/505132029-17853409614454993-963601118754807695-n.jpg",
+    alt: "Image 72",
+  },
 ];
 
 // Features
@@ -370,15 +403,31 @@ const features = [
   },
 ];
 
-// Stats
+// stats
 const stats = [
-  { id: 1, number: "200+", label: "Blogs Published", color: "text-indigo-700" },
-  { id: 2, number: "1K+", label: "Happy Readers", color: "text-pink-700" },
+  {
+    id: 1,
+    number: 1200,
+    label: "Total Posts",
+    color: "from-purple-500 to-indigo-600",
+  },
+  {
+    id: 2,
+    number: 4500,
+    label: "Total Views",
+    color: "from-pink-500 to-red-600",
+  },
   {
     id: 3,
-    number: "5⭐",
-    label: "Top Rated Platform",
-    color: "text-green-700",
+    number: 800,
+    label: "Total Comments",
+    color: "from-green-400 to-teal-600",
+  },
+  {
+    id: 4,
+    number: 150,
+    label: "Total Authors",
+    color: "from-yellow-400 to-orange-500",
   },
 ];
 
@@ -420,6 +469,8 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+      {/* Date Time  */}
+      <DateTimeCard />
       {/* Hero Carousel */}
       <div className="mt-10 mb-10">
         <Carousel
@@ -483,28 +534,42 @@ const HomePage = () => {
       </div>
 
       {/* Image Gallery */}
-      <div className="bg-white py-16">
-        <h2 className="text-4xl font-bold text-center text-pink-600 mb-10">
-          Image Gallery 📸
+      <div className="relative min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] py-20 px-6 overflow-hidden">
+        {/* Full rainbow animated overlay */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-pink-500 via-purple-500 via-blue-500 via-green-400 via-yellow-400 to-red-500 opacity-40 animate-gradientMove"></div>
+
+        <h2 className="text-5xl font-extrabold text-center text-white mb-16 drop-shadow-xl relative z-10">
+          💛 ADON'S PERSONAL GALLERY 💛
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-10">
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-14 relative z-10">
           {visibleImages.map((image, i) => (
             <div
               key={image.id}
-              className="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition"
+              className="group relative cursor-pointer perspective"
               onClick={() => {
                 setPhotoIndex(i);
                 setLightboxOpen(true);
               }}
             >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-80 object-cover transform transition duration-300 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition">
-                <div className="absolute bottom-4 left-4 text-white font-bold text-lg">
-                  {image.alt}
+              <div className="relative overflow-hidden rounded-3xl shadow-2xl transition-all duration-700 transform group-hover:rotate-[5deg] group-hover:scale-105 bg-white/10 backdrop-blur-lg border border-white/20">
+                {/* Animated neon border */}
+                <div className="absolute -inset-1 z-0 rounded-3xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 blur-lg opacity-80 animate-neonPulse"></div>
+
+                {/* Image with 3D effect */}
+                <div className="relative z-10 transform transition-transform duration-700 group-hover:rotate-y-[15deg] group-hover:-rotate-x-[10deg]">
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-80 object-cover rounded-3xl transition-transform duration-700 group-hover:scale-110 group-hover:brightness-110"
+                  />
+                </div>
+
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-black/30 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition duration-700 z-20">
+                  <div className="absolute bottom-5 left-5 text-white text-lg font-bold drop-shadow-md animate-fadeInUp">
+                    {image.alt}
+                  </div>
                 </div>
               </div>
             </div>
@@ -512,10 +577,10 @@ const HomePage = () => {
         </div>
 
         {!showAll && (
-          <div className="flex justify-center mt-10">
+          <div className="flex justify-center mt-20 relative z-10">
             <button
               onClick={() => setShowAll(true)}
-              className="px-8 py-3 bg-gradient-to-r from-pink-400 to-indigo-500 text-white rounded-full text-lg font-semibold shadow-lg hover:scale-105 transition"
+              className="px-10 py-4 bg-gradient-to-r from-fuchsia-500 to-indigo-600 text-white rounded-full text-xl font-bold shadow-xl hover:scale-105 transition duration-300"
             >
               Show More
             </button>
@@ -552,22 +617,7 @@ const HomePage = () => {
       </div>
 
       {/* Stats */}
-      <div className="bg-white py-16">
-        <h2 className="text-4xl font-bold text-center text-purple-600 mb-10">
-          Blog Statistics 📊
-        </h2>
-        <div className="flex justify-center gap-20 text-center">
-          {stats.map((stat) => (
-            <div key={stat.id}>
-              <h3 className={`text-5xl font-bold ${stat.color} mb-2`}>
-                {stat.number}
-              </h3>
-              <p className="text-xl">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
+      <BlogStatistics stats={stats} />
       {/* Testimonials */}
       <div className="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-16">
         <h2 className="text-4xl font-bold text-center text-indigo-700 mb-10">
@@ -589,24 +639,38 @@ const HomePage = () => {
       </div>
 
       {/* Newsletter */}
-      <div className="bg-gradient-to-r from-purple-400 to-pink-400 py-16 text-white text-center">
-        <h2 className="text-4xl font-bold mb-6">
+      <div className="bg-gradient-to-r from-purple-500 to-pink-500 py-16 px-6 flex flex-col items-center text-white min-h-[300px]">
+        <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 drop-shadow-lg select-none">
           Subscribe to Our Newsletter 💌
         </h2>
-        <p className="mb-10 text-lg">
-          Stay updated with our latest blog posts and offers!
+        <p className="mb-10 max-w-xl text-lg sm:text-xl text-center drop-shadow-md">
+          Stay updated with our latest blog posts and exclusive offers!
         </p>
-        <div className="flex justify-center">
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            // handle subscription logic here
+          }}
+          className="w-full max-w-md flex flex-col sm:flex-row gap-4 sm:gap-0 bg-white/10 backdrop-blur-lg rounded-3xl shadow-[8px_8px_20px_rgba(0,0,0,0.15),-8px_-8px_20px_rgba(255,255,255,0.15)] p-1"
+        >
           <input
             type="email"
+            required
             placeholder="Enter your email"
-            className="p-4 rounded-l-lg text-gray-800 w-96"
+            className="flex-grow px-5 py-4 rounded-3xl text-gray-900 font-medium outline-none focus:ring-4 focus:ring-purple-400 transition"
           />
-          <button className="bg-indigo-700 p-4 rounded-r-lg font-bold hover:bg-indigo-900 transition">
+          <button
+            type="submit"
+            className="bg-indigo-700 hover:bg-indigo-900 rounded-3xl px-8 py-4 font-bold transition-transform active:scale-95 shadow-lg"
+          >
             Subscribe
           </button>
-        </div>
+        </form>
       </div>
+
+      {/* Social Links  */}
+      <SocialLinks />
     </div>
   );
 };
